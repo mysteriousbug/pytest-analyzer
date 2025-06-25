@@ -50,12 +50,8 @@ Test Logs:
                 """
 
                 response = client.responses.create({
-                    model="gpt-4o",
-                    messages=[
-                        {"role": "system", "content": "You are a helpful QA assistant."},
-                        {"role": "user", "content": user_prompt}
-                    ]}
-                )
+                    model: "gpt-4.1",
+                    input: user_prompt})
 
                 st.subheader("🧠 AI Insights")
                 st.markdown(response.choices[0].message.content)
