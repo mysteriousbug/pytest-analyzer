@@ -49,12 +49,12 @@ Test Logs:
 {all_logs}
                 """
 
-                response = client.chat.completions.create(
+                response = client.responses.create({
                     model="gpt-4o",
                     messages=[
                         {"role": "system", "content": "You are a helpful QA assistant."},
                         {"role": "user", "content": user_prompt}
-                    ]
+                    ]}
                 )
 
                 st.subheader("🧠 AI Insights")
