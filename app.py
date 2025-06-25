@@ -14,7 +14,7 @@ st.title("📋 AI-Powered Test Automation Report Analyzer")
 uploaded_file = st.file_uploader("Upload HTML Report", type=["html"])
 
 if uploaded_file:
-    soup = BeautifulSoup(uploaded_file, "lxml")
+    soup = BeautifulSoup(uploaded_file, "html.parser")  # Changed from lxml to html.parser for better compatibility
 
     test_results = soup.find_all("div", class_="test")
     total_tests = len(test_results)
@@ -49,9 +49,10 @@ Test Logs:
 {all_logs}
                 """
 
-                response = client.responses.create({
-                    model: "gpt-4.1",
-                    input: user_prompt})
+                response = client.chat.completions.create(  # Corrected method name
+                    model="gpt-4",  # Corrected model name (gpt-4.1 doesn't exist)
+                    messages=[{"role": "user", "content": user_prompt}]
+                )
 
                 st.subheader("🧠 AI Insights")
                 st.markdown(response.choices[0].message.content)
